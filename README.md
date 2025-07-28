@@ -1,5 +1,6 @@
-## Pacman Game ~ pixelHamza
+## Pacman Game ~ **pixelhamza**
 
-Used:
-Java
-Swing
+**In Java and Swing as a API FrameWork**
+
+
+

@@ -1,4 +1,7 @@
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class Pacman {
     int x, y;
@@ -7,13 +10,29 @@ public class Pacman {
     final int BlockSize = 32;
     private int score = 0;
     private int intendedDx = 0, intendedDy = 0;
-
+    BufferedImage[] pacman_hallucinations; // for storing the small images
+    BufferedImage pacmanSprite;
+    int spriteWidth = 32, spriteLength = 32;
+    int i = 0;
 
 
     public Pacman(int x, int y, char[][] map) {
         this.x = x;
         this.y = y;
         this.map = map;
+        pacman_hallucinations = new BufferedImage[8];
+        getPacmanFrames();
+    }
+
+    public void getPacmanFrames(){
+        try {pacmanSprite = ImageIO.read(getClass().getResource("images/pacman_ani_try.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        for (int i = 0; i < 8; i++) {
+            pacman_hallucinations[i] = pacmanSprite.getSubimage(i * spriteWidth,0, spriteWidth, spriteLength);
+        }
+        System.out.println("pacman_animation frames have Initialised");
     }
 
     public void setDirection(int dx, int dy) {
@@ -28,12 +47,15 @@ public class Pacman {
         return y;
     }
 
+    public int getScore() {
+        return score;
+    }
 
     public void move() {
         if (isAligned()) {
             // so we try changing to intended direction if it is valid every single frame bruh!!
             int testX = x + intendedDx;
-            int testY = y + intendedDy;
+            int testY = y + intendedDy; // f magic numbers
 
 
             if (canMoveTo(testX, testY)) {
@@ -100,6 +122,7 @@ public class Pacman {
 
     public void drawPacman(Graphics g) {
         g.setColor(Color.YELLOW);
+
         int startAngle = 45; // default chehra
 
         if (dx > 0) { // right
@@ -112,9 +135,13 @@ public class Pacman {
             startAngle = 315;
         }
 
-        g.fillArc(x, y, BlockSize, BlockSize, startAngle, 270);
+        //g.fillArc(x, y, BlockSize, BlockSize, startAngle, 270);
+        if(i > 7){
+            i = 0;
+        }
+        g.drawImage(pacman_hallucinations[i],x,y,null);
+        i++;
+
     }
-    public int getScore() {
-        return score;
-    }
+
 }

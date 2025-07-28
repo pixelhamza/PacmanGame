@@ -1,11 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.EventListener;
 
 
 public class GamePanel extends JPanel implements Runnable,KeyListener, EventListener {
     private final int BlockSize = 32;
+    private final int MapOffset = 32;
     private final char[][] Map = {
             {'W','W','W','W','W','W','W','W','W','W','W','W','W','W','W','W','W','W','W','W','W'},
             {'W','P','P','P','P','P','P','P','P','P','W','P','P','P','P','P','P','P','P','P','W'},
@@ -15,16 +18,16 @@ public class GamePanel extends JPanel implements Runnable,KeyListener, EventList
             {'W','P','W','W','W','P','W','P','W','W','W','W','W','P','W','P','W','W','W','P','W'},
             {'W','P','P','P','P','P','W','P','P','P','W','P','P','P','W','P','P','P','P','P','W'},
             {'W','W','W','W','W','P','W','W','W','P','W','P','W','W','W','P','W','W','W','W','W'},
-            {'P','P','P','P','W','P','W','P','P','P','P','P','P','P','W','P','W','P','P','P','P'},
+            {'G','G','G','G','W','P','W','P','P','P','P','P','P','P','W','P','W','G','G','G','G'},
             {'W','W','W','W','W','P','W','P','W','W','D','W','W','P','W','P','W','W','W','W','W'},
-            {'P','P','P','P','P','P','P','P','W','P','P','P','W','P','P','P','P','P','P','P','P'},
-            {'W','W','W','W','W','P','W','P','W','P','P','P','W','P','W','P','W','W','W','W','W'},
+            {'P','P','P','P','P','P','P','P','W','G','G','G','W','P','P','P','P','P','P','P','P'},
+            {'W','W','W','W','W','P','W','P','W','G','G','G','W','P','W','P','W','W','W','W','W'},
             {'G','G','G','G','W','P','W','P','W','W','W','W','W','P','W','P','W','G','G','G','G'},
             {'G','G','G','G','W','P','P','P','P','P','P','P','P','P','P','P','W','G','G','G','G'},
             {'W','W','W','W','W','P','P','P','W','W','W','W','W','P','P','P','W','W','W','W','W'},
             {'W','P','P','P','P','P','P','P','P','P','W','P','P','P','P','P','P','P','P','P','W'},
             {'W','P','W','W','W','P','W','W','W','P','W','P','W','W','W','P','W','W','W','P','W'},
-            {'W','P','P','P','W','P','P','P','P','P','P','P','P','P','P','P','W','P','P','P','W'},
+            {'W','P','P','P','W','P','P','P','P','P','G','P','P','P','P','P','W','P','P','P','W'},
             {'W','P','P','P','W','P','W','P','W','W','W','W','W','P','W','P','W','P','P','P','W'},
             {'W','P','P','P','P','P','W','P','P','P','W','P','P','P','W','P','P','P','P','P','W'},
             {'W','P','W','W','W','W','W','W','W','P','W','P','W','W','W','W','W','W','W','P','W'},
@@ -35,12 +38,19 @@ public class GamePanel extends JPanel implements Runnable,KeyListener, EventList
     Pacman pacman;
     Blinky blinky;
     Thread gameThread;
+    Font pixelFont;
+
 
     public GamePanel() {
         setFocusable(true);
         addKeyListener(this);
         this.pacman = new Pacman(320, 544, Map);
         this.blinky = new Blinky(320, 32*11, Map,pacman);
+        try {
+            this.pixelFont = Font.createFont(Font.TRUETYPE_FONT,new File("Resource/fonts/ByteBounce.ttf")).deriveFont(48f);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void setGameThread() {
@@ -71,8 +81,6 @@ public class GamePanel extends JPanel implements Runnable,KeyListener, EventList
         pacman.move();
         blinky.updateDirection();
 
-
-
     }
 
     @Override
@@ -81,6 +89,10 @@ public class GamePanel extends JPanel implements Runnable,KeyListener, EventList
         drawMap(g);
         pacman.drawPacman(g);
         blinky.drawBlinky(g);
+        int currentScore = pacman.getScore();
+        g.setColor(Color.yellow);
+        g.setFont(pixelFont);
+        g.drawString("Score " + currentScore,32,778);
     }
 
     private void drawMap(Graphics g) {
