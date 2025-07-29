@@ -1,9 +1,14 @@
+package game;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
-import java.io.IOException;
+import java.io.InputStream;
 import java.util.EventListener;
+
+import util.*;
+import entity.*;
 
 
 public class GamePanel extends JPanel implements Runnable,KeyListener, EventListener {
@@ -46,8 +51,8 @@ public class GamePanel extends JPanel implements Runnable,KeyListener, EventList
         addKeyListener(this);
         this.pacman = new Pacman(320, 544, Map);
         this.blinky = new Blinky(320, 32*11, Map,pacman);
-        try {
-            this.pixelFont = Font.createFont(Font.TRUETYPE_FONT,new File("Resource/fonts/ByteBounce.ttf")).deriveFont(48f);
+        try (InputStream font = getClass().getResourceAsStream("/Resource/fonts/ByteBounce.ttf")){
+            this.pixelFont = Font.createFont(Font.TRUETYPE_FONT,font).deriveFont(48f);
         } catch (Exception e) {
             e.printStackTrace();
         }

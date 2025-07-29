@@ -1,7 +1,12 @@
+package entity;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+
+import util.Direction;
+import util.GameState;
 
 public class Pacman {
     int x, y;
@@ -25,7 +30,7 @@ public class Pacman {
     }
 
     public void getPacmanFrames(){
-        try {pacmanSprite = ImageIO.read(getClass().getResource("images/pacman_ani_try.png"));
+        try {pacmanSprite = ImageIO.read(getClass().getResource("/Resource/images/pacman_ani_try.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }

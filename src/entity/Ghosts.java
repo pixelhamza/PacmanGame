@@ -1,5 +1,9 @@
+package entity;
+
 import java.awt.*;
-import util.GhostState;
+
+import entity.*;
+import game.*;
 
 public class Ghosts {int x, y;
     protected int dx = 0, dy = 0;

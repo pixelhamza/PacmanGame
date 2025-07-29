@@ -5,5 +5,5 @@ public enum GhostState {
     Chase,
     Frightened,
     GrassTouch,
-
+    Dead,
 }
