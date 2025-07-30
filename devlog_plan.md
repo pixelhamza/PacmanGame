@@ -38,9 +38,9 @@ Date: 28-07-2025 | Day: Monday
 ---
 
 ### r
-Date: | Day:
+Date:30-7-26 | Day:Wednesday
 [+] Added:
--
+-Drunky sprite and movement logic 
 -
 [-] Removed:
 -
@@ -49,5 +49,5 @@ Date: | Day:
 -
 -
 [!] Notes:
--
+-Drunky avoids 180 turns ,making his ai a bit smarter 
 -

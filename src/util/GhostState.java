@@ -4,6 +4,7 @@ public enum GhostState {
     Scatter,
     Chase,
     Frightened,
-    GrassTouch,
+    Vanish,
     Dead,
+    Sober
 }
