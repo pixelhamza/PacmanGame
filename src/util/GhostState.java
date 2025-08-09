@@ -6,5 +6,6 @@ public enum GhostState {
     Frightened,
     Vanish,
     Dead,
-    Sober
+    Sober,
+    Home
 }

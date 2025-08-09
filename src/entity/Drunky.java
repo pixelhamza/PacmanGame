@@ -12,6 +12,7 @@ public class Drunky extends Ghosts{
     private Pacman pacman;
     private final int speed=4;
     BufferedImage DrunkySprite;
+    GhostState DrunkyState;
     private Random rand;
     int dir;
     GhostState state;
@@ -26,6 +27,7 @@ public class Drunky extends Ghosts{
         super(x,y,map);
         rand= new Random();
         dir= rand.nextInt(4);
+        DrunkyState = GhostState.Home;
 
         try {DrunkySprite = ImageIO.read(getClass().getResource("/Resource/images/vanisher_first.png"));
         } catch (IOException e) {
@@ -34,6 +36,11 @@ public class Drunky extends Ghosts{
 
     }
     public void move() {
+//        if(DrunkyState == GhostState.Home){
+//
+//        }
+        if(getX() == 320 && getY() == 256){ DrunkyState = GhostState.Scatter; };
+
         if (isAligned()) {
             int[] newDir;
             do {

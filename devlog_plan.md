@@ -40,7 +40,7 @@ Date: 28-07-2025 | Day: Monday
 ### r
 Date:30-7-26 | Day:Wednesday
 [+] Added:
--Drunky sprite and movement logic 
+- Drunky sprite and movement logic 
 -
 [-] Removed:
 -
@@ -49,5 +49,21 @@ Date:30-7-26 | Day:Wednesday
 -
 -
 [!] Notes:
--Drunky avoids 180 turns ,making his ai a bit smarter 
--
+-Drunky avoids 180 turns ,making his ai a bit smarter
+
+
+To-Do:
+- Vanisher  
+- Sprite Manager  
+- Direction  
+- Ghost State  
+- Game Staten  
+- Menu ( bg, buttons, states)  
+- Sound Manager  
+- arthur type ghost  
+- rot tiles  
+- map?  
+- controller mechanics
+- window design
+- powerups ( special and OG)
+- 
