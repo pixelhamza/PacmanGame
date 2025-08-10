@@ -46,12 +46,13 @@ public class Ghosts {int x, y;
             }
         }
         //  El teleporta boi
-        if(x/BlockSize<0){
-            x= map[0].length*BlockSize;
-        } else if (x/BlockSize> map[0].length) {
-            x=-BlockSize;// minus se not 0 cuz smoothly aate hue dikhta h pacman
-
-        }
+//        if(x/BlockSize<0){
+//            x= map[0].length*BlockSize;
+//        } else if (x/BlockSize> map[0].length) {
+//            x=-BlockSize;// minus se not 0 cuz smoothly aate hue dikhta h pacman
+//
+//        }
+        if(getX()==(map[0].length-1)*BlockSize ||getX()<=0)dx=-dx;
 
 
         int nextX = x + dx;
