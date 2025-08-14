@@ -54,7 +54,7 @@ public class GamePanel extends JPanel implements Runnable,KeyListener, EventList
         this.pacman = new Pacman(320, 544,Map);
         this.blinky = new Blinky(320, 32*11,Map,pacman);
         this.drunky= new Drunky(32*9,32*11,Map);
-        this.vanisher=new Vanisher(32*10,32*10,Map);
+        this.vanisher=new Vanisher(32*10,32*10,Map,pacman);
         try (InputStream font = getClass().getResourceAsStream("/Resource/fonts/ByteBounce.ttf")){
             this.pixelFont = Font.createFont(Font.TRUETYPE_FONT,font).deriveFont(48f);
         } catch (Exception e) {
@@ -88,8 +88,9 @@ public class GamePanel extends JPanel implements Runnable,KeyListener, EventList
 
     private void update() {
         pacman.move();
-        blinky.updateDirection();
+        blinky.move();
         drunky.move();
+        vanisher.move();
 
 
     }

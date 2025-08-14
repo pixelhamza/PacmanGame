@@ -35,6 +35,7 @@ public class Drunky extends Ghosts{
         }
 
     }
+    @Override
     public void move() {
 //        if(DrunkyState == GhostState.Home){
 //

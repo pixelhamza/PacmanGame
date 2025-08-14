@@ -27,7 +27,8 @@ public class Blinky extends Ghosts {
     }
     int[] lastDir = {0,0};
     private int[] lastPosition = {-1, -1};
-    public void updateDirection() {
+    @Override
+    public void move() {
         int blockSize = getBlockSize();
         int ghostX = (getX() + blockSize / 2) / blockSize;
         int ghostY = (getY() + blockSize / 2) / blockSize;
@@ -90,7 +91,7 @@ public class Blinky extends Ghosts {
             }
         }
         checkCollisionWithPacman(pacman);
-        move();
+        super.move();
     }
 
     private boolean isValid(int x, int y) {

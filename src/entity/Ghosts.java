@@ -5,7 +5,7 @@ import java.awt.*;
 import entity.*;
 import game.*;
 
-public class Ghosts {int x, y;
+public abstract class Ghosts {int x, y;
     protected int dx = 0, dy = 0;
     protected final char[][] map;
     final int BlockSize = 32;
@@ -45,13 +45,6 @@ public class Ghosts {int x, y;
                 dy = intendedDy;
             }
         }
-        //  El teleporta boi
-//        if(x/BlockSize<0){
-//            x= map[0].length*BlockSize;
-//        } else if (x/BlockSize> map[0].length) {
-//            x=-BlockSize;// minus se not 0 cuz smoothly aate hue dikhta h pacman
-//
-//        }
         if(getX()==(map[0].length-1)*BlockSize ||getX()<=0)dx=-dx;
 
 
