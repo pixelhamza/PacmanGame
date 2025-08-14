@@ -48,10 +48,6 @@ public class Vanisher extends Ghosts{
     }
     @Override
     public void move(){
-        if(VanisherState==GhostState.Vanish){
-            teleportNearPacman();
-
-        }
         if(VanisherState==GhostState.Visible){
             random_mode();
 

@@ -5,7 +5,7 @@ import java.awt.*;
 import entity.*;
 import game.*;
 
-public abstract class Ghosts {int x, y;
+public class Ghosts {int x, y;
     protected int dx = 0, dy = 0;
     protected final char[][] map;
     final int BlockSize = 32;
