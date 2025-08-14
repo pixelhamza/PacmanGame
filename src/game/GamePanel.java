@@ -43,6 +43,7 @@ public class GamePanel extends JPanel implements Runnable,KeyListener, EventList
     Pacman pacman;
     Blinky blinky;
     Drunky drunky;
+    Vanisher vanisher;
     Thread gameThread;
     Font pixelFont;
 
@@ -53,6 +54,7 @@ public class GamePanel extends JPanel implements Runnable,KeyListener, EventList
         this.pacman = new Pacman(320, 544,Map);
         this.blinky = new Blinky(320, 32*11,Map,pacman);
         this.drunky= new Drunky(32*9,32*11,Map);
+        this.vanisher=new Vanisher(32*10,32*10,Map);
         try (InputStream font = getClass().getResourceAsStream("/Resource/fonts/ByteBounce.ttf")){
             this.pixelFont = Font.createFont(Font.TRUETYPE_FONT,font).deriveFont(48f);
         } catch (Exception e) {
@@ -89,6 +91,7 @@ public class GamePanel extends JPanel implements Runnable,KeyListener, EventList
         blinky.updateDirection();
         drunky.move();
 
+
     }
 
     @Override
@@ -98,6 +101,7 @@ public class GamePanel extends JPanel implements Runnable,KeyListener, EventList
         pacman.drawPacman(g);
         blinky.drawBlinky(g);
         drunky.drawDrunky(g);
+        vanisher.drawVanisher((g));
         int currentScore = pacman.getScore();
         g.setColor(Color.yellow);
         g.setFont(pixelFont);
@@ -130,13 +134,13 @@ public class GamePanel extends JPanel implements Runnable,KeyListener, EventList
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
         if (key == KeyEvent.VK_A) {
-            pacman.setDirection(-4, 0); // left
+            pacman.setDirection(Direction.LEFT); // left
         } else if (key == KeyEvent.VK_D) {
-            pacman.setDirection(4, 0); // right
+            pacman.setDirection(Direction.RIGHT); // right
         } else if (key == KeyEvent.VK_W) {
-            pacman.setDirection(0, -4); // up
+            pacman.setDirection(Direction.UP); // up
         } else if (key == KeyEvent.VK_S) {
-            pacman.setDirection(0, 4); // down
+            pacman.setDirection(Direction.DOWN); // down
         }
 
     }

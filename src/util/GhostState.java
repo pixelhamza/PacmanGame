@@ -7,5 +7,6 @@ public enum GhostState {
     Vanish,
     Dead,
     Sober,
+    Visible,
     Home
 }

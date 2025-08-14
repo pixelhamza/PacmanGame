@@ -40,9 +40,9 @@ public class Pacman {
         System.out.println("pacman_animation frames have Initialised");
     }
 
-    public void setDirection(int dx, int dy) {
-        intendedDx = dx;
-        intendedDy = dy;
+    public void setDirection(Direction dir) {
+        intendedDx = dir.dx;
+        intendedDy = dir.dy;
     }
     public int getX() {
         return x;
