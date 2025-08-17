@@ -2,6 +2,7 @@ package entity;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -126,27 +127,35 @@ public class Pacman {
     }
 
     public void drawPacman(Graphics g) {
-        g.setColor(Color.YELLOW);
-
-        int startAngle = 45; // default chehra
-
-        if (dx > 0) { // right
-            startAngle = 45;
-        } else if (dx < 0) { // left mu
-            startAngle = 225;
-        } else if (dy < 0) { // up mu
-            startAngle = 135;
-        } else if (dy > 0) { // down mu
-            startAngle = 315;
-        }
-
-        //g.fillArc(x, y, BlockSize, BlockSize, startAngle, 270);
-        if(i > 7){
+        Graphics2D g2d = (Graphics2D) g;
+        AffineTransform old = g2d.getTransform();
+        if (i > 7) {
             i = 0;
         }
-        g.drawImage(pacman_hallucinations[i],x,y,null);
-        i++;
+        int angle = 0;
+        if (dx > 0) { // right
+            angle = 0;
+        } else if (dx < 0) { // left mu
+            angle = 180;
+        } else if (dy < 0) { // up mu
+            angle = 270;
+        } else if (dy > 0) { // down mu
+            angle = 90;
+        }
 
+        g.drawImage(rotateImage(pacman_hallucinations[i], angle), x, y, null);
+        i++;
+        g2d.setTransform(old);
+
+    }
+
+    private BufferedImage rotateImage(BufferedImage img, double angle) {
+        BufferedImage copy = new BufferedImage(img.getWidth(), img.getHeight(), img.getType());
+        Graphics2D g2 = copy.createGraphics();
+        g2.rotate(Math.toRadians(angle), img.getWidth() / 2.0, img.getHeight() / 2.0);
+        g2.drawImage(img, 0, 0, null);
+        g2.dispose();
+        return copy;
     }
 
 }
